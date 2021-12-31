@@ -1,0 +1,59 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <button 
+        type="button"
+        class="btn btn-outline-primary btn-sm"
+        data-toggle="modal"
+        data-target="#add-modal"
+        >Add</button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table 
+            class="table table-bordered"
+            id="dataTable"
+            width="100%"
+            cellspacing="0"
+        >
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Author</th>
+                    <th>Release Date</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% for(let i = 0; i < books.length; i ++){ %>
+                <tr>
+                    <td><%= i +1 %></td>
+                    <td><%= books[i].author %></td>
+                    <td><%= books[i].releaseDate %></td>
+                    <td><%= books[i].title %></td>
+                    <td><%= books[i].description %></td>
+                    <td class="text-center">
+                        <form action="/books/<%=books[i].id%>?_method=DELETE" method="POST">
+                        <a href="javascript:void()"
+                         class="btn btn-outline-warning btn-sm button-update"
+                         data-id="<%= books[i].id %>"
+                         data-author="<%= books[i].author %>"
+                         data-releaseDate="<%= books[i].releaseDate %>"
+                         data-title="<%= books[i].title %>"
+                         data-description="<%= books[i].description %>"
+                         >Edit</a>
+                        <button 
+                        type="submit" 
+                        class="btn btn-outline-danger btn-sm"
+                        onclick="return confirm('Are you sure want to delete this book?');"
+                        >Delete</button>
+                    </form>
+                    </td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
